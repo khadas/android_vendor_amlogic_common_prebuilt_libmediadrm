@@ -25,10 +25,6 @@ extern "C" {
 #define SECMME_V2_FLAGS_VD_INDEX(x) FLAG_(x, 0xF, 9)
 #define SECMME_V2_FLAGS_USAGE(x) FLAG_(x, 0x7, 13)
 
-#define TSN_PATH             "/sys/class/stb/tsn_source"
-#define TSN_IPTV             "local"
-#define TSN_DVB              "demod"
-
 /**
  * Common API
  */
@@ -161,40 +157,16 @@ unsigned int Secure_SetHandle(uint32_t handle);
 unsigned int Secure_GetHandle(uint32_t *handle);
 
 /*
- * Cas API
+ * Dsc API
  */
-int Secure_SetTSNSource(const char *tsn_path,
-                           const char *tsn_from);
-
-int Secure_CreateDscCtx(
-                           void **secmem_sess);
-
-int Secure_CreateDscPipeline(
-                           void *secmem_sess,
-                           int cas_dsc_idx,
-                           uint32_t video_id,
-                           uint32_t audio_id,
-                           bool av_diff_ecm,
-                           int cur_sid);
-
-void Secure_GetDscParas(
-                           cas_crypto_mode mode,
-                           ca_sc2_algo_type *dsc_algo,
-                           ca_sc2_dsc_type *dsc_type);
-
-int Secure_StartDescrambling(
-                           void *secmem_sess,
-                           int dsc_algo,
-                           int dsc_type,
-                           int video_cas_sid,
-                           int audio_cas_sid);
-
-int Secure_StopDescrambling(
-                           void *secmem_sess);
-
-int Secure_DestroyDscCtx(
-                           void **secmem_sess);
-
+int Dsc_SetTsnSource(const char *tsn_path, const char *tsn_from);
+int Dsc_OpenDev(void **secmem_sess, uint32_t dsc_dev_id);
+int Dsc_CloseDev(void **secmem_sess, uint32_t dsc_dev_id);
+int Dsc_CreateSession(void *secmem_sess, uint32_t session_token, uint32_t dsc_dev_id);
+int Dsc_ReleaseSession(void *secmem_sess, uint32_t session_token);
+int Dsc_GetSessionInfo(void *secmem_sess, uint32_t session_token);
+int Dsc_AllocChannel(void *secmem_sess, uint32_t session_token, uint32_t es_pid);
+int Dsc_FreeChannel(void *secmem_sess, uint32_t session_token, uint32_t es_pid);
 #ifdef __cplusplus
 }
 #endif
