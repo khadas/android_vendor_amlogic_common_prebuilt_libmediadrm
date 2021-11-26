@@ -9,7 +9,7 @@ TA_SUFFIX := .ta
 ifeq ($(PLATFORM_TDK_VERSION), 38)
 PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk_v3
 	ifeq ($(BOARD_AML_SOC_TYPE),)
-		LOCAL_TA := ta/v3/$(TA_UUID)$(TA_SUFFIX)
+		LOCAL_TA := ta/v3/signed/$(TA_UUID)$(TA_SUFFIX)
 	else
 		LOCAL_TA := ta/v3/dev/$(BOARD_AML_SOC_TYPE)/$(TA_UUID)$(TA_SUFFIX)
 	endif
@@ -30,11 +30,13 @@ LOCAL_MODULE_SUFFIX := $(TA_SUFFIX)
 LOCAL_STRIP_MODULE := false
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/teetz
+ifneq ($(PLATFORM_TDK_VERSION), 38)
 ifeq ($(TARGET_ENABLE_TA_SIGN), true)
 LOCAL_POST_INSTALL_CMD = $(PLATFORM_TDK_PATH)/ta_export/scripts/sign_ta_auto.py \
 		--in=$(shell pwd)/$(LOCAL_MODULE_PATH)/$(TA_UUID)$(LOCAL_MODULE_SUFFIX) \
 		--keydir=$(shell pwd)/$(BOARD_AML_TDK_KEY_PATH) \
 		--encrypt=$(ENCRYPT)
+endif
 endif
 include $(BUILD_PREBUILT)
 #####################################################################
