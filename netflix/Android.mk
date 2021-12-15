@@ -30,21 +30,15 @@ TA_UUID := 00d1ca22-1764-4e35-90aa-5b8c12630764
 TA_SUFFIX := .ta
 
 ifeq ($(PLATFORM_TDK_VERSION), 38)
-PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk_v3
-ifeq ($(BOARD_AML_SOC_TYPE),)
-LOCAL_TA := ta/v3/$(TA_UUID)$(TA_SUFFIX)
+	PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk_v3
+	ifeq ($(BOARD_AML_SOC_TYPE),)
+		LOCAL_TA := ta/v3/signed/$(TA_UUID)$(TA_SUFFIX)
+	else
+		LOCAL_TA := ta/v3/dev/$(BOARD_AML_SOC_TYPE)/$(TA_UUID)$(TA_SUFFIX)
+	endif
 else
-LOCAL_TA := ta/v3/dev/$(BOARD_AML_SOC_TYPE)/$(TA_UUID)$(TA_SUFFIX)
-endif
-else
-PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk
-LOCAL_TA := ta/v2/$(TA_UUID)$(TA_SUFFIX)
-endif
-
-ifeq ($(TARGET_ENABLE_TA_ENCRYPT), true)
-ENCRYPT := 1
-else
-ENCRYPT := 0
+	PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk
+	LOCAL_TA := ta/v2/signed/$(TA_UUID)$(TA_SUFFIX)
 endif
 
 LOCAL_SRC_FILES := $(LOCAL_TA)
@@ -55,12 +49,6 @@ LOCAL_MODULE_SUFFIX := $(TA_SUFFIX)
 LOCAL_STRIP_MODULE := false
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/teetz
-ifeq ($(TARGET_ENABLE_TA_SIGN), true)
-LOCAL_POST_INSTALL_CMD = $(PLATFORM_TDK_PATH)/ta_export/scripts/sign_ta_auto.py \
-		--in=$(shell pwd)/$(LOCAL_MODULE_PATH)/$(TA_UUID)$(LOCAL_MODULE_SUFFIX) \
-		--keydir=$(shell pwd)/$(BOARD_AML_TDK_KEY_PATH) \
-		--encrypt=$(ENCRYPT)
-endif
 include $(BUILD_PREBUILT)
 endif  # USE_PRESIGNED_TA != true
 
