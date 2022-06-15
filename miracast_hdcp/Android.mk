@@ -13,6 +13,9 @@ LOCAL_STRIP_MODULE := false
 LOCAL_32_BIT_ONLY := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_SHARED_LIBRARIES := libc++ libc libcutils libdl liblog libm libteec libutils
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-FTL SPDX-license-identifier-GPL SPDX-license-identifier-LGPL-2.1 SPDX-license-identifier-MIT legacy_by_exception_only legacy_notice
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../LICENSE
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
@@ -38,6 +41,9 @@ LOCAL_MODULE_SUFFIX := $(TA_SUFFIX)
 LOCAL_STRIP_MODULE := false
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/teetz
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-FTL SPDX-license-identifier-GPL SPDX-license-identifier-LGPL-2.1 SPDX-license-identifier-MIT legacy_by_exception_only legacy_notice
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../LICENSE
 include $(BUILD_PREBUILT)
 
 endif # TARGET_ARCH == arm
