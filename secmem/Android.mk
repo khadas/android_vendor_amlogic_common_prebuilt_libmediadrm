@@ -37,6 +37,9 @@ ifeq (1, $(strip $(shell expr $(PLATFORM_SDK_VERSION) \>= 30)))
 LOCAL_SYSTEM_EXT_MODULE := true
 endif
 LOCAL_SHARED_LIBRARIES := libamavutils_sys libcrypto libcutils liblog libteec_sys libutils libz
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-FTL SPDX-license-identifier-GPL SPDX-license-identifier-LGPL-2.1 SPDX-license-identifier-MIT legacy_by_exception_only legacy_notice
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../LICENSE
 include $(BUILD_PREBUILT)
 
 ifneq ($(USE_PRESIGNED_TA),true)
