@@ -14,7 +14,7 @@ LOCAL_PROPRIETARY_MODULE := true
 LOCAL_STRIP_MODULE := false
 LOCAL_32_BIT_ONLY := true
 LOCAL_MODULE_TAGS := optional
-LOCAL_SHARED_LIBRARIES := libc++ libcrypto libcutils libdsm liblog libteec libutils libz
+LOCAL_SHARED_LIBRARIES := libcrypto libcutils liblog libteec libutils libz
 include $(BUILD_PREBUILT)
 endif
 
