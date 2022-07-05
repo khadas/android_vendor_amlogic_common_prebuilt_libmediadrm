@@ -14,4 +14,4 @@ service vendor.drm-netflix-hal-1-4 /vendor/bin/hw/android.hardware.drm@1.4-servi
     user media
     group media mediadrm drmrpc system
     ioprio rt 4
-    task_profiles ProcessCapacityHigh
+    writepid /dev/cpuset/foreground/tasks
