@@ -7,17 +7,19 @@ ifneq ($(filter arm arm64, $(TARGET_ARCH)),)
 # libsecmem.so
 include $(CLEAR_VARS)
 LOCAL_MODULE := libsecmem
+LOCAL_MULTILIB := both
 LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
 LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
 LOCAL_PROPRIETARY_MODULE := true
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib
+LOCAL_MODULE_PATH_32 := $(TARGET_OUT_VENDOR)/lib/
+LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64/
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_SUFFIX := .so
-LOCAL_SRC_FILES := $(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_SRC_FILES_32 := arm/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_SRC_FILES_64 := arm64/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_STRIP_MODULE := false
-LOCAL_32_BIT_ONLY := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_SHARED_LIBRARIES := libamavutils libc++ libc libcrypto libcutils libdl liblog libm libmediahal_resman libteec libutils libz
 include $(BUILD_PREBUILT)
@@ -25,12 +27,13 @@ include $(BUILD_PREBUILT)
 # libsecmem_sys.so
 include $(CLEAR_VARS)
 LOCAL_MODULE := libsecmem_sys
+LOCAL_MULTILIB := both
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_SUFFIX := .so
-LOCAL_SRC_FILES := $(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_SRC_FILES_32 := arm/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_SRC_FILES_64 := arm64/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
 LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/include
 LOCAL_STRIP_MODULE := false
-LOCAL_32_BIT_ONLY := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_CHECK_ELF_FILES := false
 ifeq (1, $(strip $(shell expr $(PLATFORM_SDK_VERSION) \>= 30)))
