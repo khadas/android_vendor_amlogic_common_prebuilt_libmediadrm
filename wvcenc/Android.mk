@@ -5,14 +5,15 @@ ifneq ($(filter arm arm64, $(TARGET_ARCH)),)
 include $(CLEAR_VARS)
 ifeq ($(LOCAL_OEMCRYPTO_LEVEL),1)
 LOCAL_MODULE := liboemcrypto
+LOCAL_MULTILIB := both
 LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
 LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_SUFFIX := .so
-LOCAL_SRC_FILES := $(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_SRC_FILES_32 := arm/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_SRC_FILES_64 := arm64/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_STRIP_MODULE := false
-LOCAL_32_BIT_ONLY := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_SHARED_LIBRARIES := libcrypto libcutils liblog libteec libutils libz
 include $(BUILD_PREBUILT)
