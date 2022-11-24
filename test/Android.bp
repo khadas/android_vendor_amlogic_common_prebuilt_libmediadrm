@@ -18,41 +18,105 @@ package {
 }
 
 cc_prebuilt_binary {
-    name: "secmem_test",
-
-    vendor: true,
-    srcs: ["secmem_test"],
+   name: "secmem_test",
+   compile_multilib: "both",
+   vendor: true,
+    arch: {
+        arm: {
+            srcs: ["arm/secmem_test"],
+        },
+        arm64: {
+            srcs: ["arm64/secmem_test"],
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
     check_elf_files: false,
 }
 
 cc_prebuilt_binary {
-    name: "oemcrypto_test_aml",
-    vendor: true,
-
-    srcs: ["oemcrypto_test_aml"],
+   name: "oemcrypto_test_aml",
+   compile_multilib: "32",
+   vendor: true,
+    arch: {
+        arm: {
+            srcs: ["arm/oemcrypto_test_aml"],
+        },
+        arm64: {
+            enabled: false,
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
     check_elf_files: false,
 }
 
 cc_prebuilt_binary {
-    name: "oemcrypto_cas_test",
-    vendor: true,
-
-    srcs: ["oemcrypto_cas_test"],
+   name: "oemcrypto_cas_test",
+   compile_multilib: "32",
+   vendor: true,
+    arch: {
+        arm: {
+            srcs: ["arm/oemcrypto_cas_test"],
+        },
+        arm64: {
+            enabled: false,
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
     check_elf_files: false,
 }
 
 cc_prebuilt_binary {
-    name: "wvcas_iptv_test",
-    vendor: true,
-
-    srcs: ["wvcas_iptv_test"],
+   name: "wvcas_iptv_test",
+   compile_multilib: "32",
+   vendor: true,
+    arch: {
+        arm: {
+            srcs: ["arm/wvcas_iptv_test"],
+        },
+        arm64: {
+            enabled: false,
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
     check_elf_files: false,
 }
 
 cc_prebuilt_binary {
-    name: "wvcas_iptv_test_sys",
-
-    srcs: ["wvcas_iptv_test_sys"],
+   name: "wvcas_iptv_test_sys",
+   compile_multilib: "32",
+    arch: {
+        arm: {
+            srcs: ["arm/wvcas_iptv_test_sys"],
+        },
+        arm64: {
+            enabled: false,
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
     check_elf_files: false,
 }
-

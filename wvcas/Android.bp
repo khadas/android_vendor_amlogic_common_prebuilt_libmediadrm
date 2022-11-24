@@ -48,7 +48,7 @@ cc_prebuilt_library_shared {
     check_elf_files: false,
     arch: {
         arm: {
-            srcs: ["libcasoemcrypto.so"],
+            srcs: ["arm/libcasoemcrypto.so"],
         },
         arm64: {
             enabled: false,
@@ -64,7 +64,7 @@ cc_prebuilt_library_shared {
 
 cc_prebuilt_library_shared {
     name: "libwvmediacas",
-    compile_multilib: "32",
+    compile_multilib: "both",
 
     defaults: ["droidlogic_wvcas_go_defaults"],
     proprietary: true,
@@ -77,10 +77,10 @@ cc_prebuilt_library_shared {
     check_elf_files: true,
     arch: {
         arm: {
-            srcs: ["libwvmediacas.so"],
+            srcs: ["arm/libwvmediacas.so"],
         },
         arm64: {
-            enabled: false,
+            srcs: ["arm64/libwvmediacas.so"],
         },
         x86: {
             enabled: false,
@@ -113,7 +113,7 @@ cc_prebuilt_library_shared {
     export_include_dirs: ["include"],
     arch: {
         arm: {
-            srcs: ["libdec_ca_wvcas.so"],
+            srcs: ["arm/libdec_ca_wvcas.so"],
         },
         arm64: {
             enabled: false,
@@ -142,7 +142,7 @@ cc_prebuilt_library_shared {
     export_include_dirs: ["include"],
     arch: {
         arm: {
-            srcs: ["libdec_ca_wvcas.system.so"],
+            srcs: ["arm/libdec_ca_wvcas.system.so"],
         },
         arm64: {
             enabled: false,
