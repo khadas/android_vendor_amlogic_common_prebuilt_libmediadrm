@@ -19,7 +19,6 @@ package {
 
 cc_prebuilt_binary {
    name: "secmem_test",
-   compile_multilib: "both",
    vendor: true,
     arch: {
         arm: {
