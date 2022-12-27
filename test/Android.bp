@@ -59,27 +59,6 @@ cc_prebuilt_binary {
 }
 
 cc_prebuilt_binary {
-   name: "oemcrypto_cas_test",
-   compile_multilib: "32",
-   vendor: true,
-    arch: {
-        arm: {
-            srcs: ["arm/oemcrypto_cas_test"],
-        },
-        arm64: {
-            enabled: false,
-        },
-        x86: {
-            enabled: false,
-        },
-        x86_64: {
-            enabled: false,
-        },
-    },
-    check_elf_files: false,
-}
-
-cc_prebuilt_binary {
    name: "wvcas_iptv_test",
    compile_multilib: "32",
    vendor: true,

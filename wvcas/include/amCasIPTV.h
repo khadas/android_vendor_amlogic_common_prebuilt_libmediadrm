@@ -40,6 +40,14 @@ public:
     AmCasCode_t processEcm(int isSection, int isVideoEcm, int vEcmPid, int aEcmPid, unsigned char *pBuffer, int iBufferLength);
     AmCasCode_t processEmm(int isSection, int iPid, uint8_t *pBuffer, int iBufferLength);
     AmCasCode_t setCasInstanceId(int casInstanceId);
+
+    #ifdef SUPPORT_CAS_PVR
+    AmCasCode_t initMediaCasPvr(bool playback);
+    AmCasCode_t setPvrDesType(uint32_t type);
+    AmCasCode_t getPvrEnScrambleKey(uint8_t* outKey,size_t* keyLength);
+    AmCasCode_t openPvrScramble(uint32_t vPid,uint32_t aPid,uint8_t* pvrKey,size_t keyLength);
+    AmCasCode_t closeMediaCasPvr();
+    #endif
     int getCasInstanceId();
     int             mCasObjIdx;//use for aml mp multi-channel cas
 
@@ -55,6 +63,9 @@ private:
     int             maPid;
     CasStreamInfo   *mCasStreamInfo;
     void            *mAmcasHandle;
+    #ifdef SUPPORT_CAS_PVR
+    void            *mPvrCasHandle;
+    #endif
 };
 
 #endif

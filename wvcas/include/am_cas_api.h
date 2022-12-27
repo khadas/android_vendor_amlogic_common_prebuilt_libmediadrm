@@ -18,17 +18,17 @@ extern "C" {
 
 typedef enum
 {
-	CAS_STATUS_OK,
-	CAS_STATUS_ERROR,
-	CAS_STATUS_NOT_IMPLEMENTED,
+    CAS_STATUS_OK,
+    CAS_STATUS_ERROR,
+    CAS_STATUS_NOT_IMPLEMENTED,
 } AmCasStatus_t;
 
 #define ChkArgs(expr) do { \
-	if (expr) { \
-		ALOGE("[%s:%d] Parameter error!\n", \
-			__FUNCTION__, __LINE__); \
-		return CAS_STATUS_ERROR; \
-	} \
+    if (expr) { \
+        ALOGE("[%s:%d] Parameter error!\n", \
+            __FUNCTION__, __LINE__); \
+        return CAS_STATUS_ERROR; \
+    } \
 } while(0);
 
 AmCasStatus_t createAmCas(void **casObj);
@@ -44,10 +44,10 @@ AmCasStatus_t provision(void *casObj);
 AmCasStatus_t setPids(void *casObj, int vPid, int aPid);
 
 AmCasStatus_t processEcm(void *casObj, int isSection,
-	int isVideoEcm, int vEcmPid, int aEcmPid, unsigned char *pBuffer, int iBufferLength);
+    int isVideoEcm, int vEcmPid, int aEcmPid, unsigned char *pBuffer, int iBufferLength);
 
 AmCasStatus_t processEmm(void *casObj, int isSection,
-	int iPid, uint8_t *pBuffer, int iBufferLength);
+    int iPid, uint8_t *pBuffer, int iBufferLength);
 
 AmCasStatus_t openSession(void *casObj, uint8_t *sessionId);
 
@@ -59,6 +59,13 @@ AmCasStatus_t closeSession(void *casObj, uint8_t *sessionId);
 
 AmCasStatus_t releaseAll(void *casObj);
 
+#ifdef SUPPORT_CAS_PVR
+AmCasStatus_t initMediaCasPvr(void *casObj,bool playback);
+AmCasStatus_t getPvrEnScrambleKey(void *casObj,uint8_t* outKey,size_t* keyLength);
+AmCasStatus_t setPvrDescrambleType(void *casObj,uint32_t type);
+AmCasStatus_t openPvrScramble(void *casObj,uint32_t vPid,uint32_t aPid,uint8_t* pvrKey,size_t keyLength);
+AmCasStatus_t closeMediaCasPvr(void *casObj);
+#endif
 #ifdef __cplusplus
 };
 #endif

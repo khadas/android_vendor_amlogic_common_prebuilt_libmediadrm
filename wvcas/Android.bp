@@ -35,34 +35,6 @@ droidlogic_wvcas_go_defaults {
 }
 
 cc_prebuilt_library_shared {
-    name: "libcasoemcrypto",
-    compile_multilib: "32",
-
-    defaults: ["droidlogic_wvcas_go_defaults"],
-    proprietary: true,
-
-    strip: {
-        none: true,
-    },
-
-    check_elf_files: false,
-    arch: {
-        arm: {
-            srcs: ["arm/libcasoemcrypto.so"],
-        },
-        arm64: {
-            enabled: false,
-        },
-        x86: {
-            enabled: false,
-        },
-        x86_64: {
-            enabled: false,
-        },
-    },
-}
-
-cc_prebuilt_library_shared {
     name: "libwvmediacas",
     compile_multilib: "both",
 
