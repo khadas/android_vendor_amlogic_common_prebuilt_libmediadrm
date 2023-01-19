@@ -2,29 +2,26 @@ LOCAL_PATH:= $(call my-dir)
 ifeq ($(TARGET_BUILD_NETFLIX_MGKID), true)
 #####################################################################
 # libnetflixplugin.so
-include $(CLEAR_VARS)
-LOCAL_MODULE := libnetflixplugin
-LOCAL_MULTILIB := both
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
-LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
-LOCAL_PROPRIETARY_MODULE := true
-ifneq (0, $(shell expr $(PLATFORM_SDK_VERSION) \>= 30))
-LOCAL_MODULE_PATH_32 := $(TARGET_OUT_VENDOR)/lib/
-LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64/
-else
-LOCAL_MODULE_PATH_32 := $(TARGET_OUT_VENDOR)/lib/mediadrm
-LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64/mediadrm
-endif
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_SUFFIX := .so
-LOCAL_SRC_FILES_32 := arm/libnetflixplugin.so
-LOCAL_SRC_FILES_64 := arm64/libnetflixplugin.so
-LOCAL_PROPRIETARY_MODULE := true
-LOCAL_STRIP_MODULE := false
-LOCAL_MODULE_TAGS := optional
-LOCAL_SHARED_LIBRARIES := libcutils liblog libteec libutils
-LOCAL_CHECK_ELF_FILES := false
-include $(BUILD_PREBUILT)
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := libnetflixplugin
+#LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
+#LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+#LOCAL_PROPRIETARY_MODULE := true
+#ifneq (0, $(shell expr $(PLATFORM_SDK_VERSION) \>= 30))
+#LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/
+#else
+#LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/mediadrm
+#endif
+#LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+#LOCAL_MODULE_SUFFIX := .so
+#LOCAL_SRC_FILES := $(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+#LOCAL_PROPRIETARY_MODULE := true
+#LOCAL_STRIP_MODULE := false
+#LOCAL_32_BIT_ONLY := true
+#LOCAL_MODULE_TAGS := optional
+#LOCAL_SHARED_LIBRARIES := libcutils liblog libteec libutils
+#LOCAL_CHECK_ELF_FILES := false
+#include $(BUILD_PREBUILT)
 
 ifneq ($(USE_PRESIGNED_TA),true)
 # 00d1ca22-1764-4e35-90aa-5b8c12630764.ta
@@ -59,39 +56,36 @@ endif  # USE_PRESIGNED_TA != true
 # -----------------------------------------------------------------------------
 # Builds android.hardware.drm@1.4-service.netflix
 #
-ifneq (0, $(shell expr $(PLATFORM_SDK_VERSION) \>= 30))
-include $(CLEAR_VARS)
+#ifneq (0, $(shell expr $(PLATFORM_SDK_VERSION) \>= 30))
+#include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES := \
-  $(LOCAL_PATH) \
-  $(LOCAL_PATH)/include
+#LOCAL_C_INCLUDES := \
+#  $(LOCAL_PATH) \
+#  $(LOCAL_PATH)/include
 
-LOCAL_SHARED_LIBRARIES := \
-  android.hardware.drm@1.0 \
-  android.hardware.drm@1.1 \
-  android.hardware.drm@1.2 \
-  android.hardware.drm@1.3 \
-  android.hardware.drm@1.4 \
-  libbase \
-  libhidlbase \
-  liblog \
-  libutils \
-  libbinder \
-  libnetflixplugin
+#LOCAL_SHARED_LIBRARIES := \
+#  android.hardware.drm@1.0 \
+#  android.hardware.drm@1.1 \
+#  android.hardware.drm@1.2 \
+#  android.hardware.drm@1.3 \
+#  android.hardware.drm@1.4 \
+#  libbase \
+#  libhidlbase \
+#  liblog \
+#  libutils \
+#  libbinder \
+#  libnetflixplugin
 
-LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/bin/hw
-LOCAL_PROPRIETARY_MODULE := true
+#LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/bin/hw
+#LOCAL_PROPRIETARY_MODULE := true
 
-LOCAL_SRC_FILES := service.cpp
+#LOCAL_SRC_FILES := service.cpp
 
-SERVICE_VERSION = 1.4
+#SERVICE_VERSION = 1.4
 
-LOCAL_MODULE := android.hardware.drm@$(SERVICE_VERSION)-service.netflix
-LOCAL_INIT_RC := android.hardware.drm@$(SERVICE_VERSION)-service.netflix.rc
-LOCAL_VINTF_FRAGMENTS := manifest_android.hardware.drm@$(SERVICE_VERSION)-service.netflix.xml
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
-LOCAL_LICENSE_CONDITIONS := notice
-LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../LICENSE
-include $(BUILD_EXECUTABLE)
-endif
+#LOCAL_MODULE := android.hardware.drm@$(SERVICE_VERSION)-service.netflix
+#LOCAL_INIT_RC := android.hardware.drm@$(SERVICE_VERSION)-service.netflix.rc
+#LOCAL_VINTF_FRAGMENTS := manifest_android.hardware.drm@$(SERVICE_VERSION)-service.netflix.xml
+#include $(BUILD_EXECUTABLE)
+#endif
 endif
