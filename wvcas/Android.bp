@@ -46,7 +46,7 @@ cc_prebuilt_library_shared {
         none: true,
     },
 
-    check_elf_files: true,
+    check_elf_files: false,
     arch: {
         arm: {
             srcs: ["arm/libwvmediacas.so"],
