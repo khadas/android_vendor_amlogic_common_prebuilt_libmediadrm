@@ -8,8 +8,8 @@ ifneq ($(filter arm arm64, $(TARGET_ARCH)),)
 include $(CLEAR_VARS)
 LOCAL_MODULE := libsecmem
 LOCAL_MULTILIB := both
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
-LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only legacy_proprietary
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted proprietary by_exception_only
 LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_PATH_32 := $(TARGET_OUT_VENDOR)/lib/
 LOCAL_MODULE_PATH_64 := $(TARGET_OUT_VENDOR)/lib64/
@@ -40,8 +40,8 @@ ifeq (1, $(strip $(shell expr $(PLATFORM_SDK_VERSION) \>= 30)))
 LOCAL_SYSTEM_EXT_MODULE := true
 endif
 LOCAL_SHARED_LIBRARIES := libamavutils_sys libcrypto libcutils liblog libteec_sys libutils libz
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-FTL SPDX-license-identifier-GPL SPDX-license-identifier-LGPL-2.1 SPDX-license-identifier-MIT legacy_by_exception_only legacy_notice
-LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-FTL SPDX-license-identifier-GPL SPDX-license-identifier-LGPL-2.1 SPDX-license-identifier-MIT legacy_by_exception_only legacy_notice legacy_proprietary
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted proprietary by_exception_only
 LOCAL_NOTICE_FILE := $(LOCAL_PATH)/../LICENSE
 include $(BUILD_PREBUILT)
 
@@ -64,8 +64,8 @@ endif
 
 LOCAL_SRC_FILES := $(LOCAL_TA)
 LOCAL_MODULE := $(TA_UUID)
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
-LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only legacy_proprietary
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted proprietary by_exception_only
 LOCAL_MODULE_SUFFIX := $(TA_SUFFIX)
 LOCAL_STRIP_MODULE := false
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES

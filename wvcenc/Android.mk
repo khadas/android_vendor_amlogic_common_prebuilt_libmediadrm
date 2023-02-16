@@ -6,8 +6,8 @@ include $(CLEAR_VARS)
 ifeq ($(LOCAL_OEMCRYPTO_LEVEL),1)
 LOCAL_MODULE := liboemcrypto
 LOCAL_MULTILIB := both
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
-LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only legacy_proprietary
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted proprietary by_exception_only
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_SRC_FILES_32 := arm/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
@@ -40,8 +40,8 @@ endif
 
 LOCAL_SRC_FILES := $(LOCAL_TA)
 LOCAL_MODULE := $(TA_UUID)
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
-LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only legacy_proprietary
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted proprietary by_exception_only
 LOCAL_MODULE_SUFFIX := $(TA_SUFFIX)
 LOCAL_STRIP_MODULE := false
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
