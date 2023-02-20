@@ -1,27 +1,21 @@
 LOCAL_PATH:= $(call my-dir)
 ifeq ($(TARGET_BUILD_NETFLIX_MGKID), true)
 #####################################################################
-# libnetflixplugin.so
-#include $(CLEAR_VARS)
-#LOCAL_MODULE := libnetflixplugin
-#LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
-#LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
-#LOCAL_PROPRIETARY_MODULE := true
-#ifneq (0, $(shell expr $(PLATFORM_SDK_VERSION) \>= 30))
-#LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/
-#else
-#LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/lib/mediadrm
-#endif
-#LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-#LOCAL_MODULE_SUFFIX := .so
-#LOCAL_SRC_FILES := $(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
-#LOCAL_PROPRIETARY_MODULE := true
-#LOCAL_STRIP_MODULE := false
-#LOCAL_32_BIT_ONLY := true
-#LOCAL_MODULE_TAGS := optional
-#LOCAL_SHARED_LIBRARIES := libcutils liblog libteec libutils
-#LOCAL_CHECK_ELF_FILES := false
-#include $(BUILD_PREBUILT)
+# libtee-hal.so
+include $(CLEAR_VARS)
+LOCAL_MODULE := libtee-hal
+LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0 SPDX-license-identifier-BSD SPDX-license-identifier-LGPL legacy_by_exception_only
+LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted
+LOCAL_SYSTEM_EXT_MODULE := true
+LOCAL_MODULE_CLASS := SHARED_LIBRARIES
+LOCAL_MODULE_SUFFIX := .so
+LOCAL_SRC_FILES_32 := arm/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_SRC_FILES_64 := arm64/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
+LOCAL_STRIP_MODULE := false
+LOCAL_MODULE_TAGS := optional
+LOCAL_CHECK_ELF_FILES := false
+LOCAL_SHARED_LIBRARIES := libcutils liblog libteec_sys libutils
+include $(BUILD_PREBUILT)
 
 ifneq ($(USE_PRESIGNED_TA),true)
 # 00d1ca22-1764-4e35-90aa-5b8c12630764.ta
