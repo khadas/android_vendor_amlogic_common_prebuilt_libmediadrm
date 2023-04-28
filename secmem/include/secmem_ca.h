@@ -170,10 +170,10 @@ unsigned int Secure_V2_GetSecmemSize(void *sess,
                            unsigned int *handle_capacity,
                            unsigned int *handle_available);
 unsigned int Secure_V2_InitSecurePool(void *sess, uint32_t vd_index, uint32_t usage,
-                           uint32_t flags);
+                           uint32_t flags, int fd);
+unsigned int Secure_V2_EnableTVPMemory(void *sess, uint32_t flags);
 unsigned int Secure_V2_DestroySecurePool(void *sess);
 unsigned int Secure_V2_UpdateFrameInfo(void *sess,
-                           uint32_t instanceid,
                            uint32_t codec,
                            int fd,
                            uint32_t flags,
