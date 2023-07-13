@@ -92,6 +92,10 @@ unsigned int Secure_V2_MemFill(void *sess,
                            uint32_t offset,
                            uint8_t *buffer,
                            uint32_t size);
+unsigned int Secure_V2_MemFillByPaddr(void *sess,
+                           uint32_t handle,
+                           uint32_t src_paddr,
+                           uint32_t size);
 unsigned int Secure_V2_MemCopy(void *sess,
                            uint32_t out_handle,
                            uint32_t in_handle,
