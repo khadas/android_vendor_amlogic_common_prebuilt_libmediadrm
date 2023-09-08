@@ -11,20 +11,7 @@
 #define AMCAS_IPTV_H
 
 #include "amCasBase.h"
-
-typedef struct __tagCAS_STREAM_INFO {
-    unsigned int        ca_system_id;
-    uint16_t            desc_num;
-    unsigned int        ecm_pid[4];
-    uint16_t            audio_pid;
-    uint16_t            video_pid;
-    int                 audio_channel;
-    int                 video_channel;
-    bool                av_diff_ecm;
-    uint8_t             *private_data;
-    unsigned int        pri_data_len;
-    void                *headers;
-} CasStreamInfo;
+#include "wvcas_types.h"
 
 class  AmCasIPTV:public AmCasBase {
 
@@ -36,16 +23,21 @@ public:
     AmCasCode_t openSession(uint8_t *sessionId);
     AmCasCode_t closeSession(uint8_t *sessionId);
     AmCasCode_t setPids(int vPid, int aPid);
+    AmCasCode_t processEcm(int isSection, uint8_t *pBuffer, int iBufferLength);
     AmCasCode_t processEcm(int isSection, int iPid, uint8_t *pBuffer, int iBufferLength);//use for aml mp multi-channel cas
     AmCasCode_t processEcm(int isSection, int isVideoEcm, int vEcmPid, int aEcmPid, unsigned char *pBuffer, int iBufferLength);
     AmCasCode_t processEmm(int isSection, int iPid, uint8_t *pBuffer, int iBufferLength);
     AmCasCode_t setCasInstanceId(int casInstanceId);
+    static bool isSystemIdSupported(int CA_system_id);
 
     #ifdef SUPPORT_CAS_PVR
     AmCasCode_t initMediaCasPvr(bool playback);
     AmCasCode_t setPvrDesType(uint32_t type);
-    AmCasCode_t getPvrEnScrambleKey(uint8_t* outKey,size_t* keyLength);
-    AmCasCode_t openPvrScramble(uint32_t vPid,uint32_t aPid,uint8_t* pvrKey,size_t keyLength);
+    AmCasCode_t getPvrReScrambleKey(int32_t casSessionId,uint8_t* outKey,size_t* keyLength);
+    AmCasCode_t getPvrScrambleKey(uint8_t* outKey,size_t* keyLength);
+    AmCasCode_t addTrackPid(uint32_t pid);
+    AmCasCode_t removeTrackPid(uint32_t pid);
+    AmCasCode_t openPvrScramble(int dschandle,uint8_t* pvrKey,size_t keyLength,bool oddEvenKey);
     AmCasCode_t closeMediaCasPvr();
     #endif
     int getCasInstanceId();
