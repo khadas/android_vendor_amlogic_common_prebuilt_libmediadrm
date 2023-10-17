@@ -1,0 +1,64 @@
+package {
+    default_applicable_licenses: ["vendor_amlogic_common_license"],
+}
+
+java_defaults{
+    name: "jcas-sdk-version-defaults",
+
+    sdk_version: "system_current",
+    min_sdk_version: "31",
+}
+
+java_import {
+    name: "jcas-base-library",
+    jars: ["libs/jcas-base-library.jar"],
+    sdk_version: "current",
+}
+
+java_import {
+    name: "jcas-library",
+    jars: ["libs/jcas-library.jar"],
+    sdk_version: "current",
+}
+
+java_import {
+    name: "jcas-widevine-library",
+    jars: ["libs/jcas-widevine-library.jar"],
+    sdk_version: "current",
+}
+
+java_library {
+    name: "jcas-builder-library",
+
+    defaults: ["jcas-sdk-version-defaults"],
+    srcs: [
+        "src/main/**/*.java",
+    ],
+
+    //manifest: "src/main/AndroidManifest.xml",
+
+    vendor: true,
+    installable: true,
+    dxflags: ["--core-library"],
+
+    libs: [
+    ],
+
+    static_libs: [
+        "jcas-base-library",
+        "jcas-library",
+        "jcas-widevine-library",
+    ],
+
+    required: [
+       "droidlogic.jcas_builder.xml",
+    ]
+}
+
+//copy xml to permissions directory
+prebuilt_etc {
+    name: "droidlogic.jcas_builder.xml",
+    vendor: true,
+    src: "droidlogic.jcas_builder.xml",
+    sub_dir: "permissions",
+}

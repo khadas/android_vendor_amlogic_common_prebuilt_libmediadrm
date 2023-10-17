@@ -1,0 +1,11 @@
+{
+  "jcasVersion": 1,
+  "soc": "amlogic",
+  "cas": {
+    "casWrapperToHandleEcmFilters": false,
+    "useCasWrapperCache": true,
+    "provisionUrl": "default",
+    "provisionKey": "default",
+    "licenseUrl": "default"
+  }
+}

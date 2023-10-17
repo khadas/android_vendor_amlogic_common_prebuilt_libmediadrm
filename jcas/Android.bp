@@ -1,0 +1,98 @@
+// *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
+//     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
+//     DEPENDING ON IT IN YOUR PROJECT. ***
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "vendor_amlogic_common_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    //   SPDX-license-identifier-BSD
+    //   SPDX-license-identifier-LGPL
+    //   legacy_by_exception_only (by exception only)
+    //   legacy_proprietary
+    default_applicable_licenses: ["vendor_amlogic_common_license"],
+}
+
+bootstrap_go_package {
+    name: "soong-droidlogic_jcas",
+    pkgPath: "android/soong/vendor/amlogic/common/prebuilt/libmediadrm/jcas",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+        "droidlogic_jcas_jni.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+droidlogic_jcas_jni_go_defaults {
+    name: "droidlogic_jcas_jni_go_defaults",
+}
+
+cc_prebuilt_library_shared {
+    name: "libjcas_jni",
+    compile_multilib: "32",
+
+    defaults: ["droidlogic_jcas_jni_go_defaults"],
+    proprietary: true,
+
+    strip: {
+        none: true,
+    },
+
+    check_elf_files: false,
+    export_include_dirs: ["include"],
+    arch: {
+        arm: {
+            srcs: ["arm/libjcas_jni.so"],
+        },
+        arm64: {
+            enabled: false,
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
+    shared_libs: [
+        "liblog",
+        "libutils",
+        "libcutils"
+    ],
+}
+
+cc_prebuilt_library_shared {
+    name: "libjcas_native_client",
+    compile_multilib: "32",
+
+    defaults: ["droidlogic_jcas_jni_go_defaults"],
+    proprietary: true,
+
+    strip: {
+        none: true,
+    },
+
+    check_elf_files: false,
+    arch: {
+        arm: {
+            srcs: ["arm/libjcas_native_client.so"],
+        },
+        arm64: {
+            enabled: false,
+        },
+        x86: {
+            enabled: false,
+        },
+        x86_64: {
+            enabled: false,
+        },
+    },
+}

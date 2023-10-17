@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation project(':dtvcas-base-library')
+    implementation project(':dtvcas-library')
+    implementation project(path: ':dtvcas-vendor-library:widevine')
+    implementation project(path: ':dtvcas-vendor-library:nagra')
+    implementation project(path: ':dtvcas-vendor-library:synamedia')
+    implementation project(path: ':dtvcas-vendor-library:irdeto')
+}
