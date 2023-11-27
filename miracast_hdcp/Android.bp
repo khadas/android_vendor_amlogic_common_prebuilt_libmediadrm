@@ -1,0 +1,57 @@
+// *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
+//     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
+//     DEPENDING ON IT IN YOUR PROJECT. ***
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "vendor_amlogic_common_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    //   SPDX-license-identifier-BSD
+    //   SPDX-license-identifier-LGPL
+    //   legacy_by_exception_only (by exception only)
+    //   legacy_proprietary
+    default_applicable_licenses: ["vendor_amlogic_common_license"],
+}
+
+bootstrap_go_package {
+    name: "soong-tee_miracast_hdcp",
+    pkgPath: "android/soong/vendor/amlogic/common/prebuilt/libmediadrm/miracast_hdcp",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+        "soong-tee_common"
+    ],
+    srcs: [
+        "tee_miracast_hdcp.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+libstagefright_go_defaults {
+    name: "libstagefright_hdcp_bp_module",
+}
+
+cc_prebuilt_library_shared {
+    name: "libstagefright_hdcp",
+    compile_multilib: "both",
+    defaults: ["libstagefright_hdcp_bp_module"],
+    strip: {
+        none: true,
+    },
+    proprietary: true,
+    shared_libs: [
+        "libc++",
+        "libc",
+        "libcutils",
+        "libdl",
+        "liblog",
+        "libm",
+        "libteec",
+        "libutils",
+    ],
+}

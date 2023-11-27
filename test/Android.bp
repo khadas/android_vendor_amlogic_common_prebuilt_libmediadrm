@@ -1,85 +1,79 @@
+// *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
+//     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
+//     DEPENDING ON IT IN YOUR PROJECT. ***
 package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "vendor_amlogic_common_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    //   SPDX-license-identifier-BSD
+    //   SPDX-license-identifier-LGPL
+    //   legacy_by_exception_only (by exception only)
+    //   legacy_proprietary
     default_applicable_licenses: ["vendor_amlogic_common_license"],
+}
+
+bootstrap_go_package {
+    name: "soong-tee_test",
+    pkgPath: "android/soong/vendor/amlogic/common/prebuilt/libmediadrm/test",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+        "soong-tee_common"
+    ],
+    srcs: [
+        "tee_test.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+tee_secmem_test_go_defaults {
+    name: "tee_secmem_test_bp_module",
+}
+
+tee_oemcrypto_test_aml_go_defaults {
+    name: "tee_oemcrypto_test_aml_bp_module",
+}
+
+tee_wvcas_iptv_test_go_defaults {
+    name: "tee_wvcas_iptv_test_bp_module",
+}
+
+tee_wvcas_iptv_test_sys_go_defaults {
+    name: "tee_wvcas_iptv_test_sys_bp_module",
 }
 
 cc_prebuilt_binary {
    name: "secmem_test",
    vendor: true,
-    arch: {
-        arm: {
-            srcs: ["arm/secmem_test"],
-        },
-        arm64: {
-            srcs: ["arm64/secmem_test"],
-        },
-        x86: {
-            enabled: false,
-        },
-        x86_64: {
-            enabled: false,
-        },
-    },
-    check_elf_files: false,
+   defaults: ["tee_secmem_test_bp_module"],
+   check_elf_files: false,
 }
 
 cc_prebuilt_binary {
    name: "oemcrypto_test_aml",
    compile_multilib: "32",
+   defaults: ["tee_oemcrypto_test_aml_bp_module"],
    vendor: true,
-    arch: {
-        arm: {
-            srcs: ["arm/oemcrypto_test_aml"],
-        },
-        arm64: {
-            enabled: false,
-        },
-        x86: {
-            enabled: false,
-        },
-        x86_64: {
-            enabled: false,
-        },
-    },
-    check_elf_files: false,
+   check_elf_files: false,
 }
 
 cc_prebuilt_binary {
    name: "wvcas_iptv_test",
    compile_multilib: "32",
    vendor: true,
-    arch: {
-        arm: {
-            srcs: ["arm/wvcas_iptv_test"],
-        },
-        arm64: {
-            enabled: false,
-        },
-        x86: {
-            enabled: false,
-        },
-        x86_64: {
-            enabled: false,
-        },
-    },
-    check_elf_files: false,
+   defaults: ["tee_wvcas_iptv_test_bp_module"],
+   check_elf_files: false,
 }
 
 cc_prebuilt_binary {
    name: "wvcas_iptv_test_sys",
    compile_multilib: "32",
-    arch: {
-        arm: {
-            srcs: ["arm/wvcas_iptv_test_sys"],
-        },
-        arm64: {
-            enabled: false,
-        },
-        x86: {
-            enabled: false,
-        },
-        x86_64: {
-            enabled: false,
-        },
-    },
-    check_elf_files: false,
+   defaults: ["tee_wvcas_iptv_test_sys_bp_module"],
+   check_elf_files: false,
 }

@@ -2,23 +2,6 @@ LOCAL_PATH:= $(call my-dir)
 include $(LOCAL_PATH)/oemcryptolevel.mk
 ifneq ($(filter arm arm64, $(TARGET_ARCH)),)
 
-include $(CLEAR_VARS)
-ifeq ($(LOCAL_OEMCRYPTO_LEVEL),1)
-LOCAL_MODULE := liboemcrypto
-LOCAL_MULTILIB := both
-LOCAL_LICENSE_KINDS := SPDX-license-identifier-Apache-2.0
-LOCAL_LICENSE_CONDITIONS := by_exception_only notice restricted proprietary by_exception_only
-LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_SUFFIX := .so
-LOCAL_SRC_FILES_32 := arm/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
-LOCAL_SRC_FILES_64 := arm64/$(LOCAL_MODULE)$(LOCAL_MODULE_SUFFIX)
-LOCAL_PROPRIETARY_MODULE := true
-LOCAL_STRIP_MODULE := false
-LOCAL_MODULE_TAGS := optional
-LOCAL_SHARED_LIBRARIES := libcrypto libcutils liblog libteec libutils libz
-include $(BUILD_PREBUILT)
-endif
-
 ifneq ($(USE_PRESIGNED_TA),true)
 include $(CLEAR_VARS)
 ifeq ($(LOCAL_OEMCRYPTO_LEVEL),1)
