@@ -9,15 +9,13 @@ ifeq ($(LOCAL_OEMCRYPTO_LEVEL),1)
 TA_UUID := e043cde0-61d0-11e5-9c26-0002a5d5c51b
 TA_SUFFIX := .ta
 
-ifeq ($(PLATFORM_TDK_VERSION), 38)
-	PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk_v3
+ifneq ($(PLATFORM_TDK_VERSION), 24)
 	ifeq ($(BOARD_AML_SOC_TYPE),)
 		LOCAL_TA := ta/v3/signed/$(TA_UUID)$(TA_SUFFIX)
 	else
 		LOCAL_TA := ta/v3/dev/$(BOARD_AML_SOC_TYPE)/$(TA_UUID)$(TA_SUFFIX)
 	endif
 else
-	PLATFORM_TDK_PATH := $(BOARD_AML_VENDOR_PATH)/tdk
 	LOCAL_TA := ta/v2/signed/$(TA_UUID)$(TA_SUFFIX)
 endif
 

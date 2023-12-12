@@ -36,10 +36,6 @@ tee_secmem_test_go_defaults {
     name: "tee_secmem_test_bp_module",
 }
 
-tee_oemcrypto_test_aml_go_defaults {
-    name: "tee_oemcrypto_test_aml_bp_module",
-}
-
 tee_wvcas_iptv_test_go_defaults {
     name: "tee_wvcas_iptv_test_bp_module",
 }
@@ -52,14 +48,6 @@ cc_prebuilt_binary {
    name: "secmem_test",
    vendor: true,
    defaults: ["tee_secmem_test_bp_module"],
-   check_elf_files: false,
-}
-
-cc_prebuilt_binary {
-   name: "oemcrypto_test_aml",
-   compile_multilib: "32",
-   defaults: ["tee_oemcrypto_test_aml_bp_module"],
-   vendor: true,
    check_elf_files: false,
 }
 

@@ -10,8 +10,6 @@ import (
 func init() {
     android.RegisterModuleType("tee_secmem_test_go_defaults",
                                     tee_secmem_test_DefaultsFactory)
-    android.RegisterModuleType("tee_oemcrypto_test_aml_go_defaults",
-                                    tee_oemcrypto_test_aml_DefaultsFactory)
     android.RegisterModuleType("tee_wvcas_iptv_test_go_defaults",
                                     tee_wvcas_iptv_test_DefaultsFactory)
     android.RegisterModuleType("tee_wvcas_iptv_test_sys_go_defaults",
@@ -32,24 +30,6 @@ func tee_secmem_test_DefaultsFactory() (android.Module) {
         p := &props
         fmt.Println("secmem_test p.Arch.Arm.Srcs", p.Arch.Arm.Srcs)
         fmt.Println("secmem_test p.Arch.Arm64.Srcs", p.Arch.Arm64.Srcs)
-        ctx.AppendProperties(p)
-    })
-    return module
-}
-
-func tee_oemcrypto_test_aml_DefaultsFactory() (android.Module) {
-    module := cc.DefaultsFactory()
-    android.AddLoadHook(module, func(ctx android.LoadHookContext) {
-        var props common.Props
-        info := common.Information{
-            FileString: "oemcrypto_test_aml",
-            SrcPath: "vendor/amlogic/common/widevine",
-            System: false,
-            MultiArch: false,
-        }
-        common.SetProps(ctx, &props, info)
-        p := &props
-        fmt.Println("tee_oemcrypto_test_aml p.Arch.Arm.Srcs", p.Arch.Arm.Srcs)
         ctx.AppendProperties(p)
     })
     return module
