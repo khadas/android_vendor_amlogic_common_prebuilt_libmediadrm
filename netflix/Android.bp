@@ -1,0 +1,59 @@
+// *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
+//     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
+//     DEPENDING ON IT IN YOUR PROJECT. ***
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "vendor_amlogic_common_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    //   SPDX-license-identifier-BSD
+    //   SPDX-license-identifier-LGPL
+    //   legacy_by_exception_only (by exception only)
+    //   legacy_proprietary
+    default_applicable_licenses: ["vendor_amlogic_common_license"],
+}
+
+bootstrap_go_package {
+    name: "soong-libtee-hal",
+    pkgPath: "android/soong/vendor/amlogic/common/prebuilt/libmediadrm/netflix",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+        "soong-tee_common"
+    ],
+    srcs: [
+        "tee_netflix.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+libtee_hal_go_defaults {
+    name: "libtee_hal_bp_module",
+}
+
+cc_prebuilt_library_shared {
+    name: "libtee-hal",
+    compile_multilib: "both",
+
+    defaults: ["libtee_hal_bp_module"],
+
+    strip: {
+        none: true,
+    },
+
+    system_ext_specific: true,
+    check_elf_files: false,
+    shared_libs: [
+		"libcutils",
+		"liblog",
+		"libteec_sys",
+		"libutils"
+    ],
+}
+
+
