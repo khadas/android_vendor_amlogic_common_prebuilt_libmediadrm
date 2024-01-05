@@ -1,0 +1,80 @@
+// *** THIS PACKAGE HAS SPECIAL LICENSING CONDITIONS.  PLEASE
+//     CONSULT THE OWNERS AND opensource-licensing@google.com BEFORE
+//     DEPENDING ON IT IN YOUR PROJECT. ***
+package {
+    // See: http://go/android-license-faq
+    // A large-scale-change added 'default_applicable_licenses' to import
+    // all of the 'license_kinds' from "vendor_amlogic_common_license"
+    // to get the below license kinds:
+    //   SPDX-license-identifier-Apache-2.0
+    //   SPDX-license-identifier-BSD
+    //   SPDX-license-identifier-LGPL
+    //   legacy_by_exception_only (by exception only)
+    //   legacy_proprietary
+    default_applicable_licenses: ["vendor_amlogic_common_license"],
+}
+
+bootstrap_go_package {
+    name: "soong-tee_clearkey",
+    pkgPath: "android/soong/vendor/amlogic/common/prebuilt/libmediadrm/clearkey",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+        "soong-tee_common"
+    ],
+    srcs: [
+        "tee_clearkey.go",
+    ],
+    pluginFor: ["soong_build"],
+}
+
+libclearkeydrm_go_defaults {
+    name: "libclearkeydrm_bp_module",
+}
+
+tee_clearkey_go_defaults {
+    name: "tee_clearkey_bp_module",
+}
+
+cc_prebuilt_library_shared {
+    name: "libclearkeydrm",
+    compile_multilib: "both",
+    defaults: ["libclearkeydrm_bp_module"],
+    strip: {
+        none: true,
+    },
+    proprietary: true,
+    shared_libs: [
+        "libteec",
+        "liblog",
+        "libutils",
+        "libcutils",
+    ],
+}
+
+cc_prebuilt_binary {
+    name: "android.hardware.drm-service.clearkey.secure",
+    defaults: ["tee_clearkey_bp_module"],
+    vendor: true,
+    init_rc: ["android.hardware.drm-service.clearkey.secure.rc"],
+    vintf_fragments: ["android.hardware.drm-service.clearkey.secure.xml"],
+    relative_install_path: "hw",
+    shared_libs: [
+        "libteec",
+        "libbase",
+        "libbinder_ndk",
+        "libcrypto",
+        "liblog",
+        "libstagefright_foundation",
+        "libprotobuf-cpp-lite",
+        "libutils",
+        "android.hardware.drm-V1-ndk",
+        "libcutils",
+        "libclearkeydrm"
+    ],
+
+}
