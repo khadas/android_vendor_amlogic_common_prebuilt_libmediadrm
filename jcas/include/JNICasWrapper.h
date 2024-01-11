@@ -12,7 +12,7 @@ extern "C" {
  *          It will prepare the CasWrapperManager and make the default CasWrapper
  * @param   void.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_CasManagerInit();
 
@@ -31,7 +31,7 @@ bool AM_IsSystemIdSupported(int caSystemId);
  * @param   clientId: The tuner client Id.
  * @param   casHandle: The cas plugin handle.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_CreateCasPlugin(AM_CasPluginInfo *casPluginInfo, int clientId, CasHandle *casHandle);
 
@@ -42,7 +42,7 @@ JCAS_JNI_RESULT AM_CreateCasPlugin(AM_CasPluginInfo *casPluginInfo, int clientId
  * @param   casSessionInfo: include the basic info for create a MediaCas Session instance.
  * @param   casSessionHandle: The cas session handle.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_OpenCasSession(CasHandle casHandle, AM_CasSessionInfo *casSessionInfo,
         CasSessionHandle* casSessionHandle);
@@ -53,7 +53,7 @@ JCAS_JNI_RESULT AM_OpenCasSession(CasHandle casHandle, AM_CasSessionInfo *casSes
  * @param   casHandle: The cas plugin handle.
  * @param   casSessionHandle: The cas session handle.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_StartDescrambling(CasHandle casHandle, CasSessionHandle casSessionHandle);
 
@@ -63,7 +63,7 @@ JCAS_JNI_RESULT AM_StartDescrambling(CasHandle casHandle, CasSessionHandle casSe
  * @param   casHandle: The cas plugin handle.
  * @param   casSessionHandle: The cas session handle.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_StopDescrambling(CasHandle casHandle, CasSessionHandle casSessionHandle);
 
@@ -73,16 +73,16 @@ JCAS_JNI_RESULT AM_StopDescrambling(CasHandle casHandle, CasSessionHandle casSes
  * @param   casHandle: The cas plugin handle.
  * @param   casSessionHandle: The cas session handle.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_CloseCasSession(CasHandle casHandle, CasSessionHandle casSessionHandle);
 
 /**
  * @brief   Destroy a CasPlugin.
  *          It will delete the CasConnection and clear the CasExtractor
- * @param   The cas handle.
+ * @param   casHandle: The cas plugin handle.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_DestroyCasPlugin(CasHandle casHandle);
 
@@ -91,9 +91,36 @@ JCAS_JNI_RESULT AM_DestroyCasPlugin(CasHandle casHandle);
  *          It will close all CasConnection instance and release the CasWrapperManager
  * @param   void.
  * @retval  AM_CAS_JNI_OK if function succeeds.
- *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if If some exception occurs.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
  */
 JCAS_JNI_RESULT AM_CasManagerTerm();
+
+/**
+ * @brief   Send the command to cas plugin.
+ *          It will send the command of middleware or app to cas plugin
+ * @param   casHandle: The cas plugin handle.
+ * @param   event: The command event.
+ * @param   arg: The specified arg of the command.
+ * @param   data: The specified data of the command.
+ * @param   dataLen: The dataLen of the command data.
+ * @retval  AM_CAS_JNI_OK if function succeeds.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
+ */
+JCAS_JNI_RESULT AM_SendCommand(CasHandle casHandle, int event, int arg, uint8_t* data, int dataLen);
+
+/**
+ * @brief   Send the command to cas plugin.
+ *          It will send the command of middleware or app to cas session
+ * @param   casHandle: The cas plugin handle.
+ * @param   casSessionHandle: The cas session handle.
+ * @param   event: The command event.
+ * @param   arg: The specified arg of the command.
+ * @param   data: The specified data of the command.
+ * @param   dataLen: The dataLen of the command data.
+ * @retval  AM_CAS_JNI_OK if function succeeds.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
+ */
+JCAS_JNI_RESULT AM_SendSessionCommand(CasHandle casHandle, CasSessionHandle casSessionHandle, int event, int arg, uint8_t* data, int dataLen);
 
 #ifdef __cplusplus
 };
