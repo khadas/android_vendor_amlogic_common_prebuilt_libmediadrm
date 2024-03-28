@@ -17,6 +17,15 @@ extern "C" {
 JCAS_JNI_RESULT AM_CasManagerInit();
 
 /**
+ * @brief   Get default CaSystemId list.
+ *          It will collect Cas default CaSystemId with CasWrapperManager.
+ * @param   caSystemIds: include the default CaSystemId list.
+ * @retval  AM_CAS_JNI_OK if function succeeds.
+ *          AM_CAS_JNI_ERR or AM_CAS_JNI_PARAM_ERR if some exception occurs.
+ */
+JCAS_JNI_RESULT AM_GetDefaultCaSystemIds(int* caSystemIds);
+
+/**
  * @brief   Determine whether the specified ca system id is supported.
  * @param   caSystemId: The specified ca system id.
  * @retval  true if the ca system id is supported.

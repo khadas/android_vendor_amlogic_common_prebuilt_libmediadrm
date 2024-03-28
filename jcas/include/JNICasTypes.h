@@ -5,6 +5,7 @@
 
 #define MAX_PRIVATE_DATA_SIZE 512
 #define MAX_SCRAMBLED_ES_NUM 8
+#define MAX_CAS_ID_NUM 8
 
 typedef size_t CasHandle;
 typedef size_t CasSessionHandle;
@@ -15,6 +16,7 @@ typedef enum {
     AM_CAS_JNI_ERR = AM_CAS_JNI_ERR_BASE,
     AM_CAS_JNI_PARAM_ERR = AM_CAS_JNI_ERR_BASE + 1,
     AM_CAS_JNI_NOT_IMPLEMENT_ERR = AM_CAS_JNI_ERR_BASE + 2,
+    AM_CAS_JNI_STATUS_ERR = AM_CAS_JNI_ERR_BASE + 3,
 } JCAS_JNI_RESULT;
 
 /**CAS callback.*/
