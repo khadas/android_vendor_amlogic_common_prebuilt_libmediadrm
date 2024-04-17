@@ -43,49 +43,50 @@ android {
 }
 
 dependencies {
-    //api project(':jcas-base-library')
-    //api project(':jcas-library')
-    //api project(path: ':jcas-vendor-library:widevine')
-    //api project(path: ':jcas-vendor-library:nagra')
-    //api project(path: ':jcas-vendor-library:sample')
-    api fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':jcas-base-library')
+    implementation project(':jcas-library')
+    implementation project(path: ':jcas-vendor-library:widevine')
+    //implementation project(path: ':jcas-vendor-library:nagra')
+    //implementation project(path: ':jcas-vendor-library:sample')
+    //api fileTree(include: ['*.jar'], dir: 'libs')
 }
 
 task clearJar(type: Delete) {
     delete "../out/" + JCasBuilderJarName + ".jar"
 }
 
-// make jcas-builder-library.jar
-task makeJar(type: Jar) {
-    archivesBaseName = JCasBuilderJarName
-    from(project.zipTree('build/intermediates/aar_main_jar/debug/classes.jar'))
-    from(project.zipTree("${gradle.ext.outputDir}/${JCasBaseJarName}.jar"))
-    from(project.zipTree("${gradle.ext.outputDir}/${JCasJarName}.jar"))
-    from(project.zipTree("${gradle.ext.outputDir}/${JCasWidevineJarName}.jar"))
-    getDestinationDirectory().set(getProject().file(genJarDir))
+// build the jar with gradlew
+task makeJar(type: Copy) {
+    from "build/intermediates/aar_main_jar/debug/"
+    into '../out'
 
-    //from "build/intermediates/aar_main_jar/debug/"
-    //into '../out'
-
-    //include 'classes.jar'
-    //rename ('classes.jar', JCasBuilderJarName + ".jar")
+    include 'classes.jar'
+    rename ('classes.jar', JCasBuilderJarName + ".jar")
 }
 
+// copy the jar to out
+task updateJar(type: Copy) {
+    from "build/intermediates/aar_main_jar/release/"
+    into '../out'
+
+    include 'classes.jar'
+    rename ('classes.jar', JCasBuilderJarName + ".jar")
+}
+
+// package and release jcas-builder-library.jar
 task releaseJar(type: Jar) {
     archivesBaseName = JCasBuilderJarName
     from(project.zipTree('build/intermediates/aar_main_jar/release/classes.jar'))
     from(project.zipTree("${gradle.ext.outputDir}/${JCasBaseJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${JCasJarName}.jar"))
     from(project.zipTree("${gradle.ext.outputDir}/${JCasWidevineJarName}.jar"))
+    from(project.zipTree("${gradle.ext.outputDir}/${SiPsiJarName}.jar"))
+    from(project.zipTree("${gradle.ext.outputDir}/${TunerJarName}.jar"))
+    from(project.zipTree("${gradle.ext.outputDir}/${DtvCommonJarName}.jar"))
+    from(project.zipTree("${gradle.ext.outputDir}/${GsonJarName}.jar"))
     getDestinationDirectory().set(getProject().file(genJarDir))
-
-    //from "build/intermediates/aar_main_jar/release/"
-    //into '../out'
-
-    //include 'classes.jar'
-    //rename ('classes.jar', JCasBuilderJarName + ".jar")
 }
 
 makeJar.dependsOn(clearJar, build)
 
-releaseJar.dependsOn(clearJar, build)
+//releaseJar.dependsOn(clearJar, build)
